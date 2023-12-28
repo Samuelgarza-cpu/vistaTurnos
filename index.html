@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- JQuery 3.7.1 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+   <!-- FontAwesome 6 -->
+   <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.0/css/all.css">
+
+   <!-- Bootstrap 5.3.2 -->
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"> -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="styles/style.css">
+
+   <title>Turnos en caja</title>
+</head>
+
+<body>
+  <header class="logo">
+   <img src="assets/images/logo-gpd.png"  width="300px"  alt="Logo">
+  </header>
+
+  
+   <div class="container">
+      <h1 class="title">TURNOS EN CAJA</h1>
+      <main class="grid-container">
+
+         <section class="grid-container">
+
+            <div class="table-container">
+
+               <table class="turn-table">
+                  <thead>
+                     <tr>
+                        <th>Caja</th>
+                        <th>Turno Actual</th>
+                     </tr>
+                  </thead>
+                  <tbody id="tbody_turnos">
+                     <tr>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+
+            <div class="banners-container">
+               <video src="assets/images/video1.mp4" controls autoplay loop></video>
+            </div>
+         </section>
+
+         <!-- <section class="nums-container">
+            <h1 class="title">TURNOS EN COLA</h1>
+
+            <div class="grid-container" id="cards_container">
+               <div class="card">A-006</div>
+               <div class="card">B-007</div>
+               <div class="card">C-008</div>
+               <div class="card">D-009</div>
+               <div class="card">E-010</div>
+               <div class="card">A-011</div>
+               <div class="card">B-012</div>
+               <div class="card">C-013</div>
+               <div class="card">D-014</div>
+            </div>
+         </section> -->
+
+
+      </main>
+   </div>
+
+
+   <!-- Bootstrap 5.3.2 -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
+   <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+   <script>
+      // Enable pusher logging - don't include this in production
+      // document.getElementById("tbody_turnos").innerHTML = "";
+      // document.getElementById("cards_container").innerHTML = "";
+
+      const CAJAS = 5
+      Pusher.logToConsole = false;
+
+      var pusher = new Pusher("b70b1baa91c69051cb75", {
+         cluster: "us2",
+      });
+
+      var channel = pusher.subscribe("myCanal");
+      channel.bind("myEvento", function (data) {
+         const rows = JSON.parse(data.message);
+ 
+         const tableHtml = `
+            ${rows.map((r, index) => {
+            if (index >= CAJAS) return
+            let bg_row = "";
+            if (index == 0) bg_row = "red";
+
+            return `<tr style="background-color:${bg_row}">
+                     <td>${r.CAJA}</td>
+                     <td>${r.TURNO}</td>
+                  </tr>`;
+           })}`;
+
+       
+         const cadenaSinComas = tableHtml.replace(","," ");  
+         const cadenaSinComas2 = cadenaSinComas.replace(","," ");  
+         const cadenaSinComas3 = cadenaSinComas2.replace(","," ");  
+         const cadenaSinComas4 = cadenaSinComas3.replace(","," ");  
+         const cadenaSinComas5 = cadenaSinComas4.replace(","," ");  
+         const cadenaSinComas6 = cadenaSinComas5.replace(","," ");  
+         document.getElementById("tbody_turnos").innerHTML = cadenaSinComas6;
+                
+       
+      });
+   </script>
+</body>
+
+</html>
+<!-- 
+const cardsHtml = `
+${rows.map((r, index) => {
+if (index < CAJAS) return
+return `
+      <div class="card">${r.TURNNO}</div>
+   `;
+})}`;
+
+document.getElementById("cards_container").innerHTML = cardsHtml; -->
