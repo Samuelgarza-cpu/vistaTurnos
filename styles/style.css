@@ -1,107 +1,156 @@
 @import url("../assets/fonts/Lexend-VariableFont_wght.ttf");
 /* FIGURAS FLOTANTES */
+@import url("./scroll.css");
 @import url("./float_figures.css");
 @import url("./turn-table.css");
 
 * {
-   font-family: "Lexend", sans-serif;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+  font-family: "Lexend", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-   background-color: rgb(18, 196, 136);
-   height: 100vh;
-   width: 100vw;
+  background-color: rgb(18, 196, 136);
+  /* height: 100vh; */
+  width: 100vw;
+  /* min-height: 100vh; */
+  /* overflow: hidden; */
 }
+
 .container {
-   display: flex;
-   flex-direction: column;
-   justify-items: center;
-   width: 100%;
-   padding-inline: 5vw;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Define las filas: header, secciones y footer */
+  /* grid-template-columns: auto 1fr auto; */
+  min-height: 100vh; /* Establece la altura mínima para ocupar el 100% de la ventana */
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  padding-inline: 5vw;
+  /* place-items: stretch stretch; */
+  /* place-content: stretch; */
+  /* place-self: stretch; */
 }
 
 .container-fluid {
-   width: 100%;
+  width: 100%;
 }
 
-.grid-container {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-   grid-gap: 1rem;
-   justify-content: center;
-   align-items: center;
-
-   padding: 1rem 0;
-   width: 100%;
+.grid {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(1rem, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  padding: 1rem 0;
+  width: 100%;
 }
 
-.grid-container-row {
-   display: grid;
-   grid-template-rows: repeat(auto-fit, minmax(1fr));
-   grid-gap: 1rem;
-   justify-content: center;
-   align-items: center;
-   margin: auto;
-   padding: 0.5rem 0;
-   justify-items: center;
-   width: 100%;
+.grid-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0.5rem 0;
+  justify-items: center;
+  width: 100%;
+}
+
+header {
+  grid-area: header;
+  color: white;
+  text-align: center;
+  /* padding: 20px; */
+}
+main {
+  height: 100%;
+}
+section {
+  padding: 20px 0;
+  /* border: 1px solid #ccc; */
+}
+footer {
+  grid-area: footer;
+  color: white;
+  padding: 20px;
 }
 
 .title {
-   margin-top: 1rem;
-   text-align: center;
-   width: 100%;
-   font-family: 'Bebas Neue', sans-serif;
-   font-size: 50px;
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
 }
-.logo{
-   display: flex;
-   align-items: center;
-   justify-content: center;
-  
+.subtitle {
+  color: white;
 }
 
 .table-container {
-   /* background-color: blue; */
-   height: 50vh;
-   grid-column: span 1;
+  background-color: blue;
+  height: 100%;
+  width: 100%;
+  grid-column: span 1;
+}
+td {
+  font-size: 4rem;
 }
 
 .banners-container {
-   background-color: black;
-   height: 50vh;
-   grid-column: span 1;
-   display: flex;
-   border-radius: 12px;
+  background-color: black;
+  height: 80vh;
+  grid-column: span 2;
+  display: flex;
+  border-radius: 12px;
+  justify-content: center;
+  /* grid-area: main; */
 }
 
-.nums-container {
-   grid-row: 2 / span 2;
+#cards_container {
+  height: 25vh;
+  overflow-y: scroll;
 }
 
 .card {
-   background-color: white;
-   border: none;
-   border-radius: 12px;
-   padding: 20px;
-   text-align: center;
-   color: rgb(13, 126, 88);
-   font-weight: bolder;
-   font-size: 2rem;
-}
-
-video {
-   object-fit: cover;
-   border-radius: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  color: rgb(13, 126, 88);
+  font-weight: bolder;
+  font-size: 2rem;
+  width: 100%;
 }
 
 img,
 video,
 object,
 embed {
-   max-width: 100%;
-   height: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.marquee-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4%;
+  padding-inline: 5vw;
+  /* background-color: aqua; */
+}
+
+#marquee_text {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color: #000; */
+  color: #e9ecef;
+  font-size: 1.5rem !important;
+  /* font-weight: bolder; */
 }
